@@ -3,9 +3,6 @@
 <head>
   <title><%= "#{@title} - " unless @title.nil? %>The Server Stack</title>
 
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-
   
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -17,7 +14,9 @@
 
       <div class="row"> <!-- alerts/messages -->
       	<div class="col-xs-12">
-          <% flash.each do |name, msg| -%>
+          <% flash.each do |name, msg| %>
+            <% name = "warning" if name == "alert" %>
+            <% name = "success" if name == "notice" %>
            	<%= content_tag :div, msg, class: "alert alert-#{name}" %>
           <% end -%>
         </div>
